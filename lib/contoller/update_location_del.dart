@@ -7,27 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Baraa extends ChangeNotifier {
+class UpdateLocationDel extends ChangeNotifier {
   CameraPosition kGooglePlex = CameraPosition(
     target: LatLng(1, 1),
     zoom: 17.4746,
   );
-  late Position cl;
+  //late Position cl;
   GoogleMapController? gmc;
   Set<Marker> mymarker = {};
-
-  Future<void> getLatAndLong(lat, long) async {
-    kGooglePlex = CameraPosition(
-      target: LatLng(lat, long),
-      zoom: 17.4746,
-    );
-    mymarker.clear();
-    mymarker.add(
-      Marker(markerId: MarkerId("1"), position: LatLng(lat, long)),
-    );
-    gmc!.animateCamera(CameraUpdate.newLatLng(LatLng(lat, long)));
-    notifyListeners();
-  }
 
   var latb;
   var longb;
@@ -71,7 +58,7 @@ class Baraa extends ChangeNotifier {
     } catch (e) {}
   }
 
-  baraa() async {
+  new_marker() async {
     try {
       mymarker.clear();
       mymarker.add(
@@ -91,11 +78,9 @@ class Baraa extends ChangeNotifier {
   void starttimer() {
     startenable = false;
     stopenable = true;
-
     timer1 = Timer.periodic(
         const Duration(seconds: 5), (Timer t) => fetch_lat_long());
-    timer2 = Timer.periodic(Duration(seconds: 5), (Timer t) => baraa());
-
+    timer2 = Timer.periodic(Duration(seconds: 5), (Timer t) => new_marker());
     notifyListeners();
   }
 
@@ -109,7 +94,7 @@ class Baraa extends ChangeNotifier {
     notifyListeners();
   }
 
-  Baraa() {
+  UpdateLocationDel() {
     getPref();
   }
 
@@ -117,7 +102,6 @@ class Baraa extends ChangeNotifier {
 
   @override
   void dispose() {
-    print("wwwwqqqqqqqqqqqqq");
     stoptimer();
     timer1.cancel();
     timer2.cancel();

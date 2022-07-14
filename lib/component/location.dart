@@ -5,7 +5,7 @@ showdialogall(context) {
   return   AwesomeDialog(
       context: context,
       title: "services",
-      body: Text("Services not enabled"))
+      body: Text("خدمة الموقع غير مفعلة يرجى تفعليها و المحاولة مجددا",textAlign: TextAlign.center,))
       .show();
 }
 
@@ -19,6 +19,7 @@ Future getPirmission(context) async {
     showdialogall(context);
   }
   per = await Geolocator.checkPermission();
+
   if (per == LocationPermission.denied) {
     per == await Geolocator.requestPermission();
   }

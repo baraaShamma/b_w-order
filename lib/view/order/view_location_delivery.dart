@@ -13,9 +13,9 @@ class ViewLocationdelivery extends StatelessWidget{
   Widget build(BuildContext context) {
    return  ChangeNotifierProvider(
      create: (context) {
-       return Baraa();
+       return UpdateLocationDel();
      },
-     child: Scaffold(body: Consumer<Baraa>(
+     child: Scaffold(body: Consumer<UpdateLocationDel>(
        builder: (context, provone, child) {
          return Container(
            height: MediaQuery.of(context).size.height-50,
